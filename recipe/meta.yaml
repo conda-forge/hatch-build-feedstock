@@ -1,5 +1,5 @@
 {% set name = "hatch-build" %}
-{% set version = "0.4.0" %}
+{% set version = "0.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/hatch_build-{{ version }}.tar.gz
-  sha256: 99c37a2373350a399407d49b7bac286faae4cb3e18409c126d16fedce4bafe90
+  sha256: 00062bf57e74051777ff7436fdaf3eb045ccc30d08d066eb2ff4415f204edd7a
 
 build:
   noarch: python
@@ -24,6 +24,7 @@ requirements:
   run:
     - python >={{ python_min }}
     - hatchling >=1.14.1,<1.15
+    - pkn >=0.3,<0.4
 
 test:
   imports:
