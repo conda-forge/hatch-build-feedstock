@@ -1,0 +1,58 @@
+schema_version: 1
+
+context:
+  name: hatch-build
+  version: "0.5.0"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/hatch_build-${{ version }}.tar.gz
+  sha256: 63eae1f4455764e91198db31f4e2e9d3936a8998a8bf8934e4658053b397af6c
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - hatch-build = hatch_build.cli:hatchling
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - hatchling
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - hatchling >=1.14.1,<1.28
+    - p2a >=0.1.1,<0.2
+    - pkn >=0.3,<0.4
+
+tests:
+  - python:
+      imports:
+        - hatch_build.cli
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}.*
+    script:
+      - hatch-build --help
+
+about:
+  summary: A minimal CLI wrapper around hatchling build
+  license: Apache-2.0
+  license_file: LICENSE
+  homepage: https://github.com/python-project-templates/hatch-build
+  repository: https://github.com/python-project-templates/hatch-build
+
+extra:
+  recipe-maintainers:
+    - timkpaine
