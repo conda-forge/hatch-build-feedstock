@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: hatch-build
-  version: "0.5.0"
+  version: "0.5.1"
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/hatch_build-${{ version }}.tar.gz
-  sha256: 63eae1f4455764e91198db31f4e2e9d3936a8998a8bf8934e4658053b397af6c
+  sha256: a6b1628d6483a5728ffc8abde4fd083cc8a2f91ccf939787df5635b7ed33f3bb
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
